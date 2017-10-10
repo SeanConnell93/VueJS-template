@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" type="text/css" href="./src/assets/css/bootstrap.min.css">
+    <meta charset="utf-8">
+    <title>test</title>
+    <style type="text/css">
+      .preloader {
+        display: none;
+      }
+      .preloader[v-cloak], #app[v-cloak] {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        z-index: 9999999;
+        background-color: #2196F3;
+      }
+      .loader {
+        width: 80px;
+        height: 80px;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        animation: spin 1s ease infinite;
+        position: relative;
+      }
+      .half {
+        position: absolute;
+        left: -10%;
+        right: -10%;
+        bottom: -10%;
+        top: 50%;
+        background-color: #2196F3;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(720deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div v-cloak id="app">
+      <div class="loader">
+        <div class="half"></div>
+      </div>
+    </div>
+    <script src="./src/assets/js/jquery-3.2.1.min.js"></script>
+    <script src="/dist/build.js"></script>
+  </body>
+</html>
