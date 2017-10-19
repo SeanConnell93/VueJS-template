@@ -1,57 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	<link rel="stylesheet" type="text/css" href="./src/assets/css/bootstrap.min.css">
-    <meta charset="utf-8">
-    <title>test</title>
-    <style type="text/css">
-      .preloader {
-        display: none;
-      }
-      .preloader[v-cloak], #app[v-cloak] {
-        width: 100%;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: fixed;
-        z-index: 9999999;
-        background-color: #2196F3;
-      }
-      .loader {
-        width: 80px;
-        height: 80px;
-        border: 2px solid #fff;
-        border-radius: 50%;
-        animation: spin 1s ease infinite;
-        position: relative;
-      }
-      .half {
-        position: absolute;
-        left: -10%;
-        right: -10%;
-        bottom: -10%;
-        top: 50%;
-        background-color: #2196F3;
-      }
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(720deg);
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div v-cloak id="app">
-      <div class="loader">
-        <div class="half"></div>
-      </div>
+<head>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta charset="utf-8">
+ <title>test</title>
+ <style type="text/css">
+   body {
+    margin: 0;
+  }
+  .loader {
+    display: none;
+  }
+  .loader[v-cloak] {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: #3F51B5;
+    z-index: 9999999;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .loader svg {
+    display: block;
+    width: 300px;
+    height: 300px;
+    transform: rotate(-90deg);
+  }
+  .loader svg circle {
+    fill: transparent;
+    cx: 150;
+    cy: 150;
+    stroke-width: 2;
+    stroke: #fff;
+    transform-origin: 50% 50%;
+    stroke-dasharray: 100%;
+    -webkit-animation: spin 2s linear infinite forwards;
+    animation: spin 2s linear infinite forwards;
+  }
+  .loader .spinner {
+    r: 50;
+    stroke-dashoffset: 50%;
+  }
+  .loader .spinner2 {
+    r: 35;
+    stroke-dashoffset: 75%;
+  }
+  .loader .spinner3 {
+    r: 20;
+    stroke-dashoffset: 80%;
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s;
+  }
+  @-webkit-keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(720deg);
+    }
+  }
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(720deg);
+    }
+  }
+</style>
+</head>
+<body>
+  <div id="app">
+    <div v-cloak class="loader">
+      <svg>
+        <circle class="spinner"/>
+        <circle class="spinner2"/>
+        <circle class="spinner3"/>
+      </svg>
     </div>
-    <script src="./src/assets/js/jquery-3.2.1.min.js"></script>
-    <script src="/dist/build.js"></script>
-  </body>
+  </div>
+  <script src="./src/assets/js/jquery-3.2.1.min.js"></script>
+  <script src="/dist/build.js"></script>
+</body>
 </html>

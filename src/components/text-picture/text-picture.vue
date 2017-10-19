@@ -5,9 +5,9 @@
 ===================================-->
 <div :class="type" v-if="isLeft">
 	<div class="row">
-		<div :class="[variant.grid]">
-			<div :class="type + '--img'">
-				<slot v-cloak name="img"></slot>
+		<div :class="[variant.grid, {'order-md-6': order}]">
+			<div v-cloak :class="type + '--img'">
+				<slot name="img"></slot>
 			</div>
 		</div>
 		<div :class="variant.grid">
@@ -27,7 +27,7 @@
 ====================================-->
 <div :class="type" v-else-if="isRight">
 	<div class="row">
-		<div :class="variant.grid">
+		<div :class="[variant.grid, {'order-md-6': order}]">
 			<div :class="type + '--text'">
 				<slot v-cloak name="title"></slot>
 				<slot v-cloak name="text"></slot>
@@ -35,8 +35,8 @@
 			</div>
 		</div>
 		<div :class="[variant.grid]">
-			<div :class="type + '--img'">
-				<slot v-cloak name="img"></slot>
+			<div v-cloak :class="type + '--img'">
+				<slot name="img"></slot>
 			</div>
 		</div>
 	</div>
@@ -48,8 +48,8 @@
 ==================================-->
 <div :class="variant.grid" v-else-if="isTop">
 	<div :class="type">
-		<div :class="type + '--img'">
-			<slot v-cloak name="img"></slot>
+		<div v-cloak :class="type + '--img'">
+			<slot name="img"></slot>
 		</div>
 		<div :class="type + '--text'">
 			<slot v-cloak name="title"></slot>
@@ -86,6 +86,10 @@ export default {
 
 		variant: {
 			type: Object
+		},
+
+		index: {
+			type: Number
 		}
 
 	},
@@ -98,19 +102,17 @@ export default {
 	data () {
 
 		return {
-
 			type: 'picture-left',
 			textOnly: false,
 			isLeft: false,
 			isRight: false,
-			isTop: false
-
+			isTop: false,
+			order: false
 		}
 
 	},
 
 	method: {
-
 
 	},
 
@@ -134,6 +136,15 @@ export default {
 
 		}
 
+		// change order of items if set
+		if ( this.index ) {
+
+			if ( (this.index % 2) === 0 ) {
+				this.order = true;
+			}
+
+		}
+
 
 	}
 
@@ -151,6 +162,6 @@ export default {
 	margin-right: 0;
 }
 
-  
+
 
 </style>

@@ -4,7 +4,10 @@
     <preloader></preloader>
 
     <jumbotron :variant="jumbotronData">
-      <h1 class="display-4" slot="title">{{ jumbotronData.title }}</h1>
+      <div class="container" slot="content">
+        <h1 class="jumbotron-heading">Jumbotron auto</h1>
+        <p class="lead">This can be called by name: jumbotron-auto</p>
+      </div>
     </jumbotron>
 
     <container>
@@ -29,11 +32,8 @@ export default {
     return {
 
       jumbotronData: {
-        name: 'jumbotron-half',
+        name: 'jumbotron-auto',
         src: 'https://d193o8p26ehxdy.cloudfront.net/img-thumbs/960w/LBOGQME99N.jpg',
-        title: 'Jumbotron Half',
-        text: 'called with jumbotron-half',
-        cta: false
       },
       
       textVariant: {

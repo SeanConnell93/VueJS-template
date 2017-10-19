@@ -1,25 +1,25 @@
 <template>
-		
-		<div :class="[{'jumbotron-wrapper': variant.parallax}, variant.name]" 
-					class="jumbotron jumbotron-fluid">
 
-			<div :class="{'element-container': variant.parallax}" 
-						class="jumbotron-bg" 
-						:style="{ 'background-image': 'url(' + variant.src + ')' }">
-			</div>
+<!--====================================
+=            jumbotron-full            =
+=====================================-->
 
-			<div class="container">
+<div id="jumbotron-wrapper" :class="variant.name" class="jumbotron jumbotron-fluid">
 
-				<h1 class="display-4">{{ variant.title }}</h1>
-				<p class="lead">{{ variant.text }}</p>
-				<button v-if="variant.cta" type="button" class="btn btn-primary btn-lg">Primary</button>
+	<div :class="[{'element-container': variant.parallax}, 'jumbotron-bg']" :style="{ 'background-image': 'url(' + variant.src + ')' }">
+	</div>
 
-			</div>
-			
-			<svg v-if="variant.name === 'jumbotron-half'" class="angle" viewBox="0 0 100 100" preserveAspectRatio="none">
-			  <path vector-effect="non-scaling-stroke" d="M100 100 L0 100 L100 0 Z" />
-			</svg>
-		</div>
+	<slot name="content"></slot>
+
+	<svg v-if="variant.name === 'jumbotron-auto'" class="angle" viewBox="0 0 100 100" preserveAspectRatio="none">
+	  <path vector-effect="non-scaling-stroke" d="M100 100 L0 100 L100 0 Z" />
+	</svg>
+
+</div>
+
+
+<!--====  End of jumbotron-full  ====-->
+
 
 </template>
 
@@ -52,9 +52,9 @@ export default {
 		if ( this.variant.parallax ) {
 
 			new SlowBgEffect({
-				slowDown: 5,
+				slowDown: 4,
 				element: '.element-container',
-				container: '.jumbotron-wrapper'
+				container: '#jumbotron-wrapper'
 			});
 
 		}

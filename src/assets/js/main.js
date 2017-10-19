@@ -134,11 +134,9 @@ loadMoreData.prototype.render = function(scrollPos, bodyHeight) {
 
 export var Ripple = function(obj) {
 
-	this.element = obj.element;
-
 	if (!obj.timeOut) obj.timeOut = 600;
 
-	$(document).on('click', this.element, function(e) {
+	$(document).on('click', obj.element, function(e) {
 		$(this).append('<div class="ripple"></div>');
 
 		setTimeout(function() {

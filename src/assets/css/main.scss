@@ -1,14 +1,21 @@
 
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400');
-
+@import '../../../node_modules/bootstrap/scss/bootstrap.scss';
+@import '_nav.scss';
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Roboto Slab', serif;
 }
 
+// remove bootstrap button styles
+.btn, .btn-group .btn {
+  outline: none;
+  box-shadow: none;
+}
+
 p, span {
   font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-  font-weight: 100;
+  font-weight: 300;
   font-size: 18px;
 }
 
@@ -18,14 +25,7 @@ p, span {
   overflow-x: hidden;
   overflow-y: visible;
   min-height: 100vh;
-
-  &::-webkit-scrollbar-track, 
-  &::-webkit-scrollbar, 
-  &::-webkit-scrollbar-thumb  {
-    display: none;
-  }
 }
-
 
 
 /*====================================
@@ -48,7 +48,6 @@ p, span {
   &--text {
     margin-bottom: 15px;
     position: relative;
-    color: #2c3544;
 
     h3 {
       margin-bottom: 10px;
@@ -59,7 +58,6 @@ p, span {
     }
 
     .btn {
-      box-shadow: none;
 
       &-group > .btn {
         border-radius: 5px !important;
@@ -70,20 +68,37 @@ p, span {
 
   }
 
+  // preloader placeholders
+  h3[v-cloak] {
+    min-height: 28px;
+  }
+  p[v-cloak] {
+    min-height: 50px;
+  }
+  .btn[v-cloak] *, .btn-group[v-cloak] * {
+    min-height: 20px;
+    opacity: 0;
+  }
+  &--img[v-cloak] img {
+    min-height: 150px;
+    opacity: 0;
+  }
+
   [v-cloak] {
+    position: relative;
     color: transparent;
     animation: placeHolderEffect 1s linear infinite;
-    background: #f6f7f8;
+    background: $gray-200;
     background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
     background-size: 800px 10px;
   }
 
   @keyframes placeHolderEffect{
     0%{
-        background-position: -500px 0
+      background-position: -500px 0
     }
     100%{
-        background-position: 500px 0
+      background-position: 500px 0
     }
   }
   
@@ -102,24 +117,43 @@ p, span {
 .jumbotron {
   position: relative;
   background-color: #000;
+  background: linear-gradient(0deg, #141e30, #243b55);
 
 
   &-full {
     min-height: 100vh;
-    display: flex;
-    align-items: center;
     overflow: hidden;
+    @extend .d-flex;
+    @extend .align-items-center;
   }
 
-  &-half {
-    min-height: 75vh;
-    display: flex;
-    align-items: center;
+  &-auto {
+    min-height: 50vh;
+    @extend .d-flex;
+    @extend .align-items-end;
+    @extend .flex-wrap;
+    padding-bottom: 0;
+
+    .container {
+      margin-top: 4rem;
+    }
   }
 
-  .display-4, .lead {
-    color: #fff;
+  &-heading {
+    font-weight: 100 !important;
+    @extend .text-light;
+  }
 
+  @include media-breakpoint-up(sm) {
+
+    &-heading {
+      font-size: 4rem;
+    }
+
+  }
+
+  .lead {
+    @extend .text-light;
 
     &::first-letter {
       text-transform: capitalize;
@@ -128,7 +162,6 @@ p, span {
   }
 
   .btn {
-    border: none;
 
     &:focus, &:active {
       box-shadow: none;
@@ -136,12 +169,8 @@ p, span {
 
   }
 
-  .display-4 {
-    font-weight: 100 !important;
-  }
-
   &-bg {
-    background: #515151 no-repeat center;
+    background: $dark no-repeat center;
     background-size: cover;
     position: absolute;
     min-height: 100%;
@@ -149,24 +178,28 @@ p, span {
     height: auto;
     width: auto;
     top: 0;
-    opacity: 0.5;
+    opacity: 0.2;
   }
 
-  .angle {
-    position: absolute;
+  .container {
+    z-index: 10;
+  }
+
+  svg.angle {
+    position: relative;
     left: 0;
     bottom: 0px;
     width: 100%;
-    height: 100px;
+    height: 75px;
     fill: #fff;
     stroke-width: 0;
+    margin-top: 25px;
   }
   
 
 }
 
 /*=====  End of jumbotrons  ======*/
-
 
 
 
