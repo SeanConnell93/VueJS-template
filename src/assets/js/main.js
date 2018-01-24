@@ -72,9 +72,6 @@ PopIn.prototype.run = function() {
 		addClassDelay(200);
 	}
 
-	
-
-
 }
 /*=====  End of PopIn effect on nav  ======*/
 
@@ -85,42 +82,38 @@ PopIn.prototype.run = function() {
 =            handle new loaded data            =
 ==============================================*/
 
-export var loadMoreData = function(obj) {
+export var loadMoreData = function(obj, callback) {
 
-	this.data = obj.data;
-	this.addData = obj.addData;
-	obj.offset ? obj.offset = this.offset : this.offset = 1000;
+	this.dataContainer = obj.dataContainer;
+	obj.offset ? this.offset = obj.offset : this.offset = 2;
 
 	this.isRequesting = false;
 
-	var bodyHeight  = $('#posts').height(),
-		scrollPos = $(window).scrollTop();
-
+	var bodyHeight,
+		scrollPos;
 
 	$(document).on('scroll', function() {
 
-		this.render(scrollPos, bodyHeight);
+		this.render(scrollPos, bodyHeight, callback);
 
 	}.bind(this));
 
 }
 
-loadMoreData.prototype.render = function(scrollPos, bodyHeight) {
+loadMoreData.prototype.render = function(scrollPos, bodyHeight, callback) {
 
-	scrollPos = $(window).scrollTop();
-	bodyHeight = $('#posts').height();
+	scrollPos = $(window).scrollTop() + $(window).height() * this.offset;
+	bodyHeight = $('body').height();
 
-	if ( bodyHeight < (scrollPos + $(window).height()) && !this.isRequesting ) {
+	if ( bodyHeight < scrollPos && !this.isRequesting) {
 
 		this.isRequesting = true;
-
-		return this.data = this.addData;
-
-
+		callback();
+		return;
 	}
 	
-
 }
+
 
 
 /*=====  End of handle new loaded data  ======*/

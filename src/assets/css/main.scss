@@ -55,6 +55,15 @@ p, span {
       &::first-letter {
         text-transform: uppercase;
       }
+
+      small {
+        display: block;
+        font-size: 12px;
+        @extend .text-muted;
+        @extend .mt-3;
+        font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+      }
+
     }
 
     .btn {
@@ -124,7 +133,6 @@ p, span {
     min-height: 100vh;
     overflow: hidden;
     @extend .d-flex;
-    @extend .align-items-center;
   }
 
   &-auto {
@@ -133,23 +141,22 @@ p, span {
     @extend .align-items-end;
     @extend .flex-wrap;
     padding-bottom: 0;
+  }
 
-    .container {
-      margin-top: 4rem;
-    }
+  .container {
+    z-index: 10;
+    margin-top: 4rem;
   }
 
   &-heading {
     font-weight: 100 !important;
     @extend .text-light;
-  }
 
-  @include media-breakpoint-up(sm) {
-
-    &-heading {
-      font-size: 4rem;
+    @include media-breakpoint-up(sm) {
+      &-heading {
+        font-size: 4rem;
+      }
     }
-
   }
 
   .lead {
@@ -179,10 +186,6 @@ p, span {
     width: auto;
     top: 0;
     opacity: 0.2;
-  }
-
-  .container {
-    z-index: 10;
   }
 
   svg.angle {

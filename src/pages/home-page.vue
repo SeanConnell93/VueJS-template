@@ -6,7 +6,7 @@
       <div class="container" slot="content">
         <h1 class="jumbotron-heading">Jumbotron full</h1>
         <p class="lead">This can be called by name: jumbotron-full</p>
-        <button type="button" class="btn btn-lg">Primary</button>
+        <button type="button" class="btn btn-success btn-lg">Primary</button>
       </div>
     </jumbotron>
 
@@ -15,18 +15,20 @@
       <container>
 
         <text-picture slot="content" v-for="content in contents" :key="content.id" :variant="textVariant" :index="content.id">
+
           <img class="img-fluid" slot="img" :src="src">
           <h3 slot="title">{{ content.title }}</h3>
           <p slot="text">{{ content.body }}</p>
+
           <div class="btn-group" slot="cta">
             <router-link class="mr-3" :to="textVariant.ctaUrl">
               <button type="button" class="btn btn-primary">{{ textVariant.ctaText }}</button>
             </router-link>
-
             <router-link :to="textVariant.ctaUrl">
               <button type="button" class="btn btn-outline-primary">secondary</button>
             </router-link>
           </div>
+
         </text-picture>
 
       </container>
@@ -37,7 +39,7 @@
 
 <script>
 
-import {loadMoreData} from './../assets/js/main';
+// import {loadMoreData} from './../assets/js/main';
 
 export default {
 
@@ -76,11 +78,6 @@ export default {
     this.$http.get('https://jsonplaceholder.typicode.com/posts').then( function(data) {
 
       this.contents = data.body.slice(0, 10);
-
-      new loadMoreData({
-        data: this.contents,
-        addData: data.body
-      });
 
 
     });

@@ -49,9 +49,11 @@ Vue.use(VueRouter);
 
 
 /*----------  declare directive here  ----------*/
-Vue.directive('switch', {
+Vue.directive('order', {
 
 	bind(el, binding, vnode){
+
+		
 
 	}
 
