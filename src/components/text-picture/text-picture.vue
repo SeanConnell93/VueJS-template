@@ -77,11 +77,11 @@
 
 <script>
 
-
+import {PopIn} from './../../assets/js/main';
 
 export default {
 
-	/*----------  catch prop  ----------*/
+	/*----------  catch props  ----------*/
 	props: {
 
 		variant: {
@@ -112,7 +112,10 @@ export default {
 
 	},
 
-	method: {
+
+	mounted () {
+
+		
 
 	},
 
@@ -155,11 +158,16 @@ export default {
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
 .row {
 	margin-left: 0;
 	margin-right: 0;
+}
+
+
+.btn {
+	cursor: pointer;
 }
 
 

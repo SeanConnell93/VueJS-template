@@ -52,7 +52,7 @@ export default {
 		if ( this.variant.parallax ) {
 
 			new SlowBgEffect({
-				slowDown: 4,
+				slowDown: 3,
 				element: '.element-container',
 				container: '#jumbotron-wrapper'
 			});

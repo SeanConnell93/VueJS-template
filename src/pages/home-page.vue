@@ -58,7 +58,7 @@ export default {
       textVariant: {
         grid: 'col-md-6',
         type: 'picture-left',
-        ctaUrl: '/',
+        ctaUrl: '/about',
         ctaText: 'Primary'
       },
 
@@ -93,4 +93,13 @@ export default {
 
 }
 </script>
+
+
+<style lang="scss">
+
+  
+
+</style>
+
+
 

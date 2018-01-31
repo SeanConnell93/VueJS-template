@@ -9,6 +9,13 @@
     </jumbotron>
 
     <container>
+      <div class="ml-3 mb-5 bg-success text-white p-2" slot="content">
+        <h1 >Dynamicly loading content</h1>
+        <p>Content loading from <a class="text-white" target="_blank" href="https://jsonplaceholder.typicode.com/">jsonplaceholder.typicode.com</a></p>
+      </div>
+    </container>
+
+    <container>
 
       <text-picture slot="content" v-for="content in contents" :key="content.id" :variant="textVariant">
         <h3 slot="title">{{ content.title }} <small>{{ date }}</small> </h3>
@@ -22,7 +29,7 @@
 
 <script>
 
-import { loadMoreData } from './../assets/js/main.js';
+import { loadMoreData, Appear } from './../assets/js/main.js';
 
 export default {
 
@@ -49,7 +56,6 @@ export default {
   methods: {
 
 
-
   },
 
   computed: {
@@ -62,6 +68,7 @@ export default {
       return d.getUTCDate() + '/' + month + '/' + d.getUTCFullYear();
 
     }
+
 
   },
 
@@ -76,24 +83,23 @@ export default {
     });
 
 
-    var self = this;
     var load = new loadMoreData({
       dataContainer: this.contents,
       url: 'https://jsonplaceholder.typicode.com/posts'
     }, function() {
 
 
-      var have = self.contents.length + 1,
+      var have = this.contents.length + 1,
           need = have + 10;
       for (have; have < need; have++) {
-        self.$http.get('https://jsonplaceholder.typicode.com/posts/' + have).then( res => {
+        this.$http.get('https://jsonplaceholder.typicode.com/posts/' + have).then( res => {
 
           if ( res.status === 200 ) {
             // console.log(res.body);
-            self.contents.push( res.body );
+            this.contents.push( res.body );
 
             // sort the order by id
-            self.contents.sort(function(a, b){
+            this.contents.sort(function(a, b){
               return a.id - b.id;
             });
 
@@ -108,9 +114,13 @@ export default {
 
       }
 
-    });
+    }.bind(this));
 
     
+    var appearEffect = new Appear({
+      element: '.col-md-6',
+      addClass: 'appear-effect'
+    });
 
 
 
@@ -124,3 +134,19 @@ export default {
 }
 </script>
 
+
+
+<style lang="scss">
+
+  .col-md-6 {
+    opacity: 0;
+    transition: all 0.4s ease;
+    transform: translate3d(0px, 50px, 0px);
+  }
+
+  .col-md-6.appear-effect, .col-md-6:nth-of-type(-n+4) {
+    opacity: 1;
+    transform: translate3d(0px, 0px, 0px);
+  }
+
+</style>

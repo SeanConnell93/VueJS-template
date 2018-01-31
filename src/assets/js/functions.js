@@ -9,6 +9,8 @@ $(document).ready(function(){
 	});
 
 	
+
+	
 	new Slow_text({
 		slow_down: 2,
 		scale_img: true
