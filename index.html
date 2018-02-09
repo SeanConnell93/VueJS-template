@@ -1,92 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
- <meta name="viewport" content="width=device-width, initial-scale=1">
- <meta charset="utf-8">
- <title>test</title>
- <style type="text/css">
-   body {
-    margin: 0;
-  }
-  .loader {
-    display: none;
-  }
-  .loader[v-cloak] {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    background-color: #3F51B5;
-    z-index: 9999999;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-  .loader svg {
-    display: block;
-    width: 300px;
-    height: 300px;
-    transform: rotate(-90deg);
-  }
-  .loader svg circle {
-    fill: transparent;
-    cx: 150;
-    cy: 150;
-    stroke-width: 2;
-    stroke: #fff;
-    transform-origin: 50% 50%;
-    stroke-dasharray: 100%;
-    -webkit-animation: spin 2s linear infinite forwards;
-    animation: spin 2s linear infinite forwards;
-  }
-  .loader .spinner {
-    r: 50;
-    stroke-dashoffset: 50%;
-  }
-  .loader .spinner2 {
-    r: 35;
-    stroke-dashoffset: 75%;
-  }
-  .loader .spinner3 {
-    r: 20;
-    stroke-dashoffset: 80%;
-    -webkit-animation-delay: 0.2s;
-    animation-delay: 0.2s;
-  }
-  @-webkit-keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(720deg);
-    }
-  }
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(720deg);
-    }
-  }
-</style>
-</head>
-<body>
-  <div id="app">
-    <div v-cloak class="loader">
-      <svg>
-        <circle class="spinner"/>
-        <circle class="spinner2"/>
-        <circle class="spinner3"/>
-      </svg>
-    </div>
-  </div>
-  <script
-  src="http://code.jquery.com/jquery-3.2.1.slim.min.js"
-  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
-  crossorigin="anonymous"></script>
-  <script src="/dist/build.js"></script>
-</body>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>app</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+  <script src="./build/build.js"></script>
 </html>
