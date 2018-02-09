@@ -1,4 +1,4 @@
-
+import JQuery from 'JQuery'
 
 /*====================================================
 =            Slow bg effect on jumbotrons            =
@@ -9,13 +9,13 @@ export var SlowBgEffect = function(obj) {
 	obj.container ? this.container = obj.container : this.container = '';
 	
 	// double check element exists
-	if ($(this.element).length <= 0 ) return;
+	if (JQuery(this.element).length <= 0 ) return;
 	
-	var containerTop = $(this.container).position().top,
-	containerHeight = $(this.container).outerHeight(),
+	var containerTop = JQuery(this.container).position().top,
+	containerHeight = JQuery(this.container).outerHeight(),
 	scrollPos;
 	
-	$(document).on('touchstart touchend touchmove scroll', function(){
+	JQuery(document).on('touchstart touchend touchmove scroll', function(){
 		
 		this.render(containerTop, containerHeight, scrollPos);
 		
@@ -26,10 +26,10 @@ export var SlowBgEffect = function(obj) {
 /*----------  this is run on scroll  ----------*/
 SlowBgEffect.prototype.render = function( conTop, conHeight, scrollPos){
 	
-	scrollPos = $(window).scrollTop();
+	scrollPos = JQuery(window).scrollTop();
 	
 	if ( scrollPos > conTop && scrollPos < conTop + conHeight ) {
-		$(this.element).css({ 
+		JQuery(this.element).css({ 
 			transform: 'translate3d( 0px, ' + ((scrollPos - conTop) / this.slowDown) + 'px, 0px)'
 		});
 	}
@@ -58,15 +58,15 @@ PopIn.prototype.run = function() {
 
 		setTimeout( function() { 
 			// the "this" value dosen't work here, even with bind, weird?
-			$(self.element).eq(i).toggleClass( self.addClass );
+			JQuery(self.element).eq(i).toggleClass( self.addClass );
 		}.bind(this), self.delay * (i+1));
 
 	}
 	
 	// toggle element class if has this.hasClass 
-	if ( !$(this.hasClass).hasClass( this.hasClass ) ) {
+	if ( !JQuery(this.hasClass).hasClass( this.hasClass ) ) {
 		
-		for (var i = 0; i < $(this.element).length; i++) {
+		for (var i = 0; i < JQuery(this.element).length; i++) {
 			addClassDelay(i);
 		}
 		
@@ -93,18 +93,26 @@ export var loadMoreData = function(obj, callback) {
 	
 	let bodyHeight, scrollPos;
 	
-	$(document).on('scroll', function() {
+	JQuery(document).on('scroll', function() {
 		
 		this.render(scrollPos, bodyHeight, callback);
 		
 	}.bind(this));
+
+	// JQuery(document).off('unload', function() {
+		
+	// 	this.render(scrollPos, bodyHeight, callback);
+
+	// 	console.log('left');
+		
+	// }.bind(this));
 	
 }
 
 loadMoreData.prototype.render = function(scrollPos, bodyHeight, callback) {
 	
-	scrollPos = $(window).scrollTop() + $(window).height() * this.offset;
-	bodyHeight = $('body').height();
+	scrollPos = JQuery(window).scrollTop() + JQuery(window).height() * this.offset;
+	bodyHeight = JQuery('body').height();
 	
 	if ( bodyHeight < scrollPos && !this.isRequesting) {
 		
@@ -114,6 +122,8 @@ loadMoreData.prototype.render = function(scrollPos, bodyHeight, callback) {
 	}
 	
 }
+
+
 
 
 
@@ -130,11 +140,11 @@ export var Ripple = function(obj) {
 	
 	if (!obj.timeOut) obj.timeOut = 600;
 	
-	$(document).on('click', obj.element, function(e) {
-		$(this).append('<div class="ripple"></div>');
+	JQuery(document).on('click', obj.element, function(e) {
+		JQuery(this).append('<div class="ripple"></div>');
 		
 		setTimeout(function() {
-			$('.ripple').remove();
+			JQuery('.ripple').remove();
 		}, obj.timeOut);
 		
 	});
@@ -176,7 +186,7 @@ export var Appear = function(obj){
 
 	// render selected func when scrolled
 	var self = this;
-	$(document).on('scroll', function(){
+	JQuery(document).on('scroll', function(){
 		switch(self.variant){
 			default:
 			case 'show_element':
@@ -199,17 +209,17 @@ Appear.prototype.show_all_children = function(){
 
 	var _self = this; // keep context of Appear constructor
 
-	$(_self.trigger).each(function(){
+	JQuery(_self.trigger).each(function(){
 
-        var top_of_el = $(this).offset().top - ($(window).height() - _self.offset),
-        	scroll_pos = $(window).scrollTop(),
+        var top_of_el = JQuery(this).offset().top - (JQuery(window).height() - _self.offset),
+        	scroll_pos = JQuery(window).scrollTop(),
         	_trigger = this; // keep context of this trigger element
 
         if ( scroll_pos > top_of_el ){
-    		$(_self.trigger).children(_self.element).each(function(i){
+    		JQuery(_self.trigger).children(_self.element).each(function(i){
     			var _child = this; // keep context of this child element
     			setTimeout(function(){
-    				$(_trigger).children(_child).eq(i).addClass(_self.addClass);
+    				JQuery(_trigger).children(_child).eq(i).addClass(_self.addClass);
     			}, _self.delay * (i+1) );
     		});
         } 
@@ -224,12 +234,12 @@ Appear.prototype.show_all_children = function(){
 Appear.prototype.show_element = function(){
 	var i = 0,
 		top_of_el,
-		element = $(this.element),
-    	scroll_pos = $(window).scrollTop(),
+		element = JQuery(this.element),
+    	scroll_pos = JQuery(window).scrollTop(),
     	element_lenght = element.length;
 
 	for (i; i < element_lenght; i++) {
-		top_of_el = element.eq(i).offset().top - ($(window).height() - this.offset);
+		top_of_el = element.eq(i).offset().top - (JQuery(window).height() - this.offset);
 
 		if ( scroll_pos > top_of_el ){
             element.eq(i).addClass(this.addClass);
@@ -244,16 +254,16 @@ Appear.prototype.show_element = function(){
 =====================================================================*/
 Appear.prototype.show_all_elements = function(){
 	var _self = this,
-		srcoll_pos = $(window).scrollTop(),
-		element_exists = $(_self.element).length;
+		srcoll_pos = JQuery(window).scrollTop(),
+		element_exists = JQuery(_self.element).length;
 		
 	if ( element_exists ) {
-		var top_of_element = $(_self.element).offset().top - ($(window).height() - _self.offset);
+		var top_of_element = JQuery(_self.element).offset().top - (JQuery(window).height() - _self.offset);
 
         if (srcoll_pos > top_of_element) {
-	        $( _self.element ).each(function(i){
+	        JQuery( _self.element ).each(function(i){
 	            setTimeout( function(){
-	               $(_self.element).eq(i).addClass( _self.addClass );
+	               JQuery(_self.element).eq(i).addClass( _self.addClass );
 	            }, _self.delay * (i+1));
 	        });
     	}   

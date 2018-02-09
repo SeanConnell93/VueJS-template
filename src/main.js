@@ -1,71 +1,33 @@
+// The Vue build version to load with the `import` command
+// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import App from './App.vue'
-import VueRouter from 'vue-router'
-import VueResource from 'vue-resource'
-
-/*===============================================
-=            make http requests AJAX            =
-===============================================*/
-
-Vue.use(VueResource);
-
-/*=====  End of make http requests AJAX  ======*/
+import App from './App'
+import router from './router'
 
 
+// reg components
 
-/*----------  declare components here  ----------*/
-import appNav from './components/nav/nav.vue'
-import container from './components/container/container.vue'
-import textPicture from './components/text-picture/text-picture.vue'
-import jumbotron from './components/jumbotron/jumbotrons.vue'
-import preloader from './components/preloader/preloader.vue'
-
-Vue.component('app-nav', appNav);
+import jumbotron from './components/jumbotrons'
 Vue.component('jumbotron', jumbotron);
+
+import textPicture from './components/text-picture'
 Vue.component('text-picture', textPicture);
-Vue.component('container', container);
-Vue.component('preloader', preloader);
 
+import appNav from '@/components/nav'
+Vue.component('app-nav', appNav);
 
-/*---------- end components  ----------*/
+Vue.config.productionTip = true;
 
-
-/*----------  declare Routes here  ----------*/
-import Routes from './routers'
-
-const router = new VueRouter({
-	routes: Routes,
-	mode: 'history',
-	// return scroll position to the top when new page is visited
-	scrollBehavior (to, from, savedPosition) {
-	  return { x: 0, y: 0 }
-	}
-});
-
-Vue.use(VueRouter);
-
-/*----------  end Routes  ----------*/
-
-
-
-/*----------  declare directive here  ----------*/
-Vue.directive('order', {
-
-	bind(el, binding, vnode){
-
-		
-
-	}
-
-});
-
-/*----------  end directive  ----------*/
-
-
-
-
+/* eslint-disable no-new */
 new Vue({
   el: '#app',
-  render: h => h(App),
-  router: router
+  router,
+  components: { 
+    App,
+    jumbotron,
+    textPicture,
+    appNav,
+  },
+  template: '<App/>'
 })
+
